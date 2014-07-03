@@ -1,3 +1,7 @@
 name: data_engine
 dependencies:
   browser: any
+transformers:
+- $dart2js:
+    checked: true
+    minify: false

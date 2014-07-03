@@ -10,7 +10,7 @@ class DataEngine extends Group {
   }
 
   render(Map<String, dynamic> data) {
-    //dom.window.console.log(this);
+    //_updateState(this, data, data, svg);
     _render(data, data, svg);
   }
 }
@@ -98,7 +98,7 @@ class Shape {
     state.attr("attributeName", "transform");
 
     _exitList.add(state);
-    print(_exitList);
+    //print(_exitList);
     return state;
   }
 
@@ -226,7 +226,7 @@ class Shape {
 
   void updateProperty(element, d) {
     if (_text != null) {
-      element.text=_getFunctionString(_text,d);
+      element.text = _getFunctionString(_text, d);
     }
 
     _setAttr(element, d);
@@ -244,7 +244,7 @@ class Shape {
       element = _getElement(d);
       _svgMap[d] = element;
       updateProperty(element, d);
-      panel.append(element);
+      //panel.append(element);
     }
 
     //_setEvent(element, d);
@@ -277,7 +277,7 @@ class Shape {
       updateProperty(element, d);
 
       _svgMap[d] = element;
-      panel.append(element);
+      //panel.append(element);
     }
 
 
@@ -321,59 +321,57 @@ class Shape {
     return targetData;
   }
 
-  void _render(Map<String, dynamic> data, rootData, dom.Element panel) {
-//    nestedRender(Shape state, targetData) {
-//      var element = state._updateTag(targetData, panel);
-//
-//      state._render(targetData, rootData, element);
-//    }
+  void _updateState(Shape state, Map<String, dynamic> data, rootData, dom.Element panel) {
 
-    for (Shape state in _stateList) {
-
-      var targetData = state._getTargetData(data, rootData);
+    var targetData = state._getTargetData(data, rootData);
 
 
-      if (targetData != null) {
+    if (targetData != null) {
 
-        if (targetData is List) {
-          //TODO sync svg element
-          state._setupRemove(panel);
+      if (targetData is List) {
+        //TODO sync svg element
+        state._setupRemove(panel);
 
-          //state.cacheSvg();
-          for (var d in targetData) {
-            state._updateTag(d, panel);
-          }
-
-
-          for (var d in state._toBeRemovedSVG.keys) {
-            var svg = state._toBeRemovedSVG[d];
-            state._setExitAnim(svg, d);
-
-            //svg.remove();
-          }
-
-          state._toBeRemovedSVG.clear();
-
-          for (var d in targetData) {
-            state._render(d, rootData, state._svgMap[d]);
-          }
-
+        //state.cacheSvg();
+        for (var d in targetData) {
+          state._updateTag(d, panel);
         }
 
-        else {
-          var element = state._updateSingleTag(targetData, panel);
-          state._render(targetData, rootData, element);
+
+        for (var d in state._toBeRemovedSVG.keys) {
+          var svg = state._toBeRemovedSVG[d];
+          state._setExitAnim(svg, d);
+
+          //svg.remove();
         }
+
+        state._toBeRemovedSVG.clear();
+
+        for (var d in targetData) {
+          state._render(d, rootData, state._svgMap[d]);
+        }
+
       }
+
       else {
-        for (var d in state._svgMap.keys) {
-          var svg = state._svgMap[d];
-          if (svg.parent == panel) {
-            state._setExitAnim(svg, d);
-            //svg.remove();
-          }
+        var element = state._updateSingleTag(targetData, panel);
+        state._render(targetData, rootData, element);
+      }
+    }
+    else {
+      for (var d in state._svgMap.keys) {
+        var svg = state._svgMap[d];
+        if (svg.parent == panel) {
+          state._setExitAnim(svg, d);
+          //svg.remove();
         }
       }
+    }
+  }
+
+  void _render(Map<String, dynamic> data, rootData, dom.Element panel) {
+    for (Shape state in _stateList) {
+      _updateState(state, data, rootData, panel);
     }
   }
 

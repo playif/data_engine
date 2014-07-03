@@ -19,59 +19,91 @@ main() {
   };
 
   var rand = new Random();
-  for (var i = 0;i < 500;i++) {
-    data['list'].add({
-        'name':'b',
-        'r':20,
-        'cx':rand.nextInt(400),
-        'cy':rand.nextInt(400),
-        'rotate':10,
-        'speed':rand.nextInt(5)+2,
-        'anim':[{
-            'name':1
-        }, {
-            'name':2
-        }]
-    });
+  for (var i = 0;i < 11;i++) {
+    for (var j = 0;j < 11;j++) {
+      data['list'].add({
+          'name':'b',
+          'r':20,
+          'x':i * 22 + 11,
+          'y':j * 22 + 11,
+          'rotate':0,
+          'color':'blue',
+          'speed':rand.nextInt(5) + 2
+      });
+    }
   }
 
-  var engine = new DataEngine(querySelector('svg'));
+  SvgSvgElement svg = querySelector('svg');
 
+  var engine = new DataEngine(svg);
+  //var panel = engine.addGroup();
+  //.attr('fill', 'red')
+  //.css('pointer-events', 'all')
+  window.onMouseMove.listen((e) {
+    //var element = e.target;
+    //window.console.log(element);
+    var p = svg.createSvgPoint();
+    p.x = e.page.x;
+    p.y = e.page.y;
+    Matrix mat = svg.getScreenCtm().inverse();
+    p = p.matrixTransform(mat);
+    //window.console.log(e.target.getScreenCtm());
+    //window.console.log(e);
+//    if(element is SvgElement){
+//      SvgElement svg=element;
+//      SvgSvgElement parent=svg.ownerSvgElement;
+//      parent.create
+//      window.console.log(e);
+//    }
+    data['FPS'] = '${p.x.ceil()},${p.y.ceil()}';
+    //print('moved');
+  });
 
   Group group = engine.addGroup('list')
-  .attr('stroke-width', (d) => 2)
+  .attr('stroke-width', (d) => 1)
 // .attr('transform',(d) =>'')
-  .attr('transform', (d) => 'translate(${d['cx']} ${d['cy']}) rotate(${d['rotate']}) scale(0.2 0.2)')
+  .attr('transform', (d) => 'translate(${d['x']} ${d['y']})  ')
+  .on('mouseenter', (e, d) {
+    d['color'] = 'red';
+  })
+  .on('mouseleave', (e, d) {
+    d['color'] = 'blue';
+  })
 //  .translate(bind('cx'), bind('cy'))
   ;
 
-  Shape circle = group.addCircle()
+  Shape circle = group.addRect()
 //  .attr('cx', (d) => 0)
 //  .attr('cy', (d) => 0)
-  .attr('r', 60)
-//  .attr('x', (d) => -30000)
-//  .attr('y', (d) => -30)
-  .attr('width', 60)
-  .attr('height', 60)
+//    .attr('r', 10)
+  .attr('x', -10)
+  .attr('y', -10)
+  .attr('width', 20)
+  .attr('height', 20)
   .attr('id', bind('name'))
-  .attr('stroke', (d) => "green");
+  .attr('stroke', bind('color'))
+  .attr('fill', (d) => "pink")
+
+  ;
 
 
   Shape circle2 = group.addRect()
-  .attr('x', (d) => -60)
-  .attr('y', (d) => -30)
+  .attr('x', (d) => -6)
+  .attr('y', (d) => -3)
   //  .attr('cy', (d) => d['cy']+15)
   .attr('r', 15)
-  .attr('width', 120)
-  .attr('height', 60)
+  .attr('width', 12)
+  .attr('height', 6)
   .attr('id', bind('name'))
-  .attr('stroke', (d) => "red")
-  .attr('stroke-width', 15)
-  .attr('transform', (d) => 'scale(0.8 0.8) translate(0 220)');
+  .attr('stroke', bind('color'))
+  .attr('stroke-width', 1)
+  .attr('transform', (d) => 'rotate(${d['rotate']})')
+  .css('pointer-events', 'stroke')
+  ;
 
   engine.addText()
   .text(bind('FPS'))
-  .attr("x", 10)
+  .attr("x", 300)
   .attr("y", 30)
   .attr("font-size", 24)
   .attr("fill", "red")
@@ -97,23 +129,23 @@ main() {
   var lastTime = 0;
 
 
-  gameLoop(num delta) {
+  loop(num delta) {
     var dt = delta - lastTime;
     lastTime = delta;
     for (var i = 0;i < data['list'].length;i++) {
-      data['list'][i]['cx'] += data['list'][i]['speed'] * dt / 100;
-      data['list'][i]['cx'] %= 400;
-      data['list'][i]['rotate'] += 20* dt / 100;
-
+      //      data['list'][i]['cx'] += data['list'][i]['speed'] * dt / 100;
+      //      data['list'][i]['cx'] %= 400;
+      //data['list'][i]['rotate'] += 20 * dt / 100;
     }
-    data['FPS'] = 1000 / dt;
+
+    //data['FPS'] = 1000 / dt;
     engine.render(data);
     //print(1000 / dt);
-    window.animationFrame.then(gameLoop);
+    window.animationFrame.then(loop);
   }
 
 
-  window.animationFrame.then(gameLoop);
+  window.animationFrame.then(loop);
 
 //  group.exit('anim')
 //  .attr('type', 'scale')
