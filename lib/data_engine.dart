@@ -218,6 +218,7 @@ class Shape {
     for (var attr in _eventMap.keys) {
       event(e) {
         _eventMap[attr](e, d);
+        _render(d, d, element);
       }
       element.addEventListener(attr, event);
     }
@@ -244,7 +245,7 @@ class Shape {
       element = _getElement(d);
       _svgMap[d] = element;
       updateProperty(element, d);
-      //panel.append(element);
+      panel.append(element);
     }
 
     //_setEvent(element, d);
@@ -277,7 +278,7 @@ class Shape {
       updateProperty(element, d);
 
       _svgMap[d] = element;
-      //panel.append(element);
+      panel.append(element);
     }
 
 

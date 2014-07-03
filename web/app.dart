@@ -127,7 +127,7 @@ main() {
 
 
   var lastTime = 0;
-
+  engine.render(data);
 
   loop(num delta) {
     var dt = delta - lastTime;
@@ -137,15 +137,15 @@ main() {
       //      data['list'][i]['cx'] %= 400;
       //data['list'][i]['rotate'] += 20 * dt / 100;
     }
-
-    //data['FPS'] = 1000 / dt;
     engine.render(data);
+    //data['FPS'] = 1000 / dt;
+
     //print(1000 / dt);
     window.animationFrame.then(loop);
   }
 
 
-  window.animationFrame.then(loop);
+ //window.animationFrame.then(loop);
 
 //  group.exit('anim')
 //  .attr('type', 'scale')

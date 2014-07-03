@@ -989,7 +989,7 @@ var $$ = {};
         return;
       t1 = this.pauseTokens;
       t1.remove$1(0, resume);
-      if (t1._collection$_length === 0) {
+      if (t1._length === 0) {
         for (t1 = this.delayedEvents; t2 = t1.length, t2 !== 0;) {
           if (0 >= t2)
             return H.ioore(t1, 0);
@@ -1108,7 +1108,7 @@ var $$ = {};
     handleUncaughtError$2: function(error, stackTrace) {
       var t1, message, t2;
       t1 = this.errorPorts;
-      if (t1._collection$_length === 0) {
+      if (t1._length === 0) {
         if (H.boolConversionCheck(this.errorsAreFatal) && this === init.globalState.rootContext)
           return;
         if (self.console && self.console.error)
@@ -1168,7 +1168,7 @@ var $$ = {};
       t1.$indexSet(0, portId, port);
     },
     _updateGlobalState$0: function() {
-      if (this.ports._collection$_length - this.weakPorts._collection$_length > 0 || this.isPaused || !this.initialized)
+      if (this.ports._length - this.weakPorts._length > 0 || this.isPaused || !this.initialized)
         init.globalState.isolates.$indexSet(0, this.id, this);
       else
         this.kill$0();
@@ -1212,10 +1212,10 @@ var $$ = {};
       var $event, t1, t2;
       $event = this.dequeue$0();
       if ($event == null) {
-        if (init.globalState.rootContext != null && init.globalState.isolates.containsKey$1(init.globalState.rootContext.id) && H.boolConversionCheck(init.globalState.fromCommandLine) && init.globalState.rootContext.ports._collection$_length === 0)
+        if (init.globalState.rootContext != null && init.globalState.isolates.containsKey$1(init.globalState.rootContext.id) && H.boolConversionCheck(init.globalState.fromCommandLine) && init.globalState.rootContext.ports._length === 0)
           H.throwExpression(P.Exception_Exception("Program exited with open ReceivePorts."));
         t1 = init.globalState;
-        if (H.boolConversionCheck(t1.isWorker) && t1.isolates._collection$_length === 0 && t1.topEventLoop._activeJsAsyncCount === 0) {
+        if (H.boolConversionCheck(t1.isWorker) && t1.isolates._length === 0 && t1.topEventLoop._activeJsAsyncCount === 0) {
           t1 = t1.mainManager;
           t2 = H._serializeMessage(P.LinkedHashMap_LinkedHashMap$_literal(["command", "close"], null, null));
           t1.toString;
@@ -3525,73 +3525,73 @@ var $$ = {};
 ["", "app.dart", , S, {
   "^": "",
   main: [function() {
-    var t1, t2, data, i, t3, j, svg, t4, t5, t6, t7, t8, t9, engine, state, circle2;
-    t1 = {};
-    t2 = new S.main_bind();
+    var t1, data, i, t2, j, svg, t3, t4, t5, t6, t7, t8, engine, state, circle2;
+    t1 = new S.main_bind();
     data = H.assertSubtype(P.LinkedHashMap_LinkedHashMap$_literal(["name", "Tim", "list", [], "FPS", 0], null, null), "$isMap", [P.String, null], "$asMap");
     for (i = 0; i < 11; ++i)
-      for (t3 = i * 22 + 11, j = 0; j < 11; ++j)
-        J.add$1$ax(data.$index(0, "list"), P.LinkedHashMap_LinkedHashMap$_literal(["name", "b", "r", 20, "x", t3, "y", j * 22 + 11, "rotate", 0, "color", "blue", "speed", C.C__JSRandom.nextInt$1(5) + 2], null, null));
+      for (t2 = i * 22 + 11, j = 0; j < 11; ++j)
+        J.add$1$ax(data.$index(0, "list"), P.LinkedHashMap_LinkedHashMap$_literal(["name", "b", "r", 20, "x", t2, "y", j * 22 + 11, "rotate", 0, "color", "blue", "speed", C.C__JSRandom.nextInt$1(5) + 2], null, null));
     svg = H.interceptedTypeCheck(C.HtmlDocument_methods.querySelector$1(document, "svg"), "$isSvgSvgElement");
+    t2 = P.LinkedHashMap_LinkedHashMap$_empty(null, null);
     t3 = P.LinkedHashMap_LinkedHashMap$_empty(null, null);
     t4 = P.LinkedHashMap_LinkedHashMap$_empty(null, null);
-    t5 = P.LinkedHashMap_LinkedHashMap$_empty(null, null);
-    t6 = P.LinkedHashSet_LinkedHashSet(null, null, null, null);
+    t5 = P.LinkedHashSet_LinkedHashSet(null, null, null, null);
+    t6 = P.LinkedHashMap_LinkedHashMap$_empty(null, null);
     t7 = P.LinkedHashMap_LinkedHashMap$_empty(null, null);
-    t8 = P.LinkedHashMap_LinkedHashMap$_empty(null, null);
-    t9 = H.assertSubtype([], "$isList", [T.Shape], "$asList");
-    engine = new T.DataEngine(svg, null, null, t9, H.assertSubtype([], "$isList", [T.Anim], "$asList"), H.assertSubtype([], "$isList", [T.Anim], "$asList"), t3, t4, t5, t6, t7, t8, null);
-    t8 = H.assertSubtype(H.assertSubtype(H.setRuntimeTypeInfo(new W._EventStream(window, C.EventStreamProvider_mousemove._eventType, false), [null]), "$isStream", [H.getTypeArgumentByIndex(C.EventStreamProvider_mousemove, 0)], "$asStream"), "$isStream", [W.MouseEvent], "$asStream");
-    t7 = new S.main_closure(data, svg);
-    t6 = H.getVoidRuntimeType();
-    H.buildFunctionType(t6, [t8.$tv_T()])._assertCheck$1(t7);
-    H.buildFunctionType(t6)._assertCheck$1(null);
-    t7 = H.setRuntimeTypeInfo(new W._EventStreamSubscription(0, t8._target, t8._eventType, W._wrapZone(t7), t8._useCapture), [H.getTypeArgumentByIndex(t8, 0)]);
-    t7._tryResume$0();
-    H.assertSubtype(t7, "$isStreamSubscription", [H.getTypeArgumentByIndex(t8, 0)], "$asStreamSubscription");
-    t8 = P.LinkedHashMap_LinkedHashMap$_empty(null, null);
+    t8 = H.assertSubtype([], "$isList", [T.Shape], "$asList");
+    engine = new T.DataEngine(svg, null, null, t8, H.assertSubtype([], "$isList", [T.Anim], "$asList"), H.assertSubtype([], "$isList", [T.Anim], "$asList"), t2, t3, t4, t5, t6, t7, null);
+    t7 = H.assertSubtype(H.assertSubtype(H.setRuntimeTypeInfo(new W._EventStream(window, C.EventStreamProvider_mousemove._eventType, false), [null]), "$isStream", [H.getTypeArgumentByIndex(C.EventStreamProvider_mousemove, 0)], "$asStream"), "$isStream", [W.MouseEvent], "$asStream");
+    t6 = new S.main_closure(data, svg);
+    t5 = H.getVoidRuntimeType();
+    H.buildFunctionType(t5, [t7.$tv_T()])._assertCheck$1(t6);
+    H.buildFunctionType(t5)._assertCheck$1(null);
+    t6 = H.setRuntimeTypeInfo(new W._EventStreamSubscription(0, t7._target, t7._eventType, W._wrapZone(t6), t7._useCapture), [H.getTypeArgumentByIndex(t7, 0)]);
+    t6._tryResume$0();
+    H.assertSubtype(t6, "$isStreamSubscription", [H.getTypeArgumentByIndex(t7, 0)], "$asStreamSubscription");
     t7 = P.LinkedHashMap_LinkedHashMap$_empty(null, null);
     t6 = P.LinkedHashMap_LinkedHashMap$_empty(null, null);
-    t5 = P.LinkedHashSet_LinkedHashSet(null, null, null, null);
-    t4 = P.LinkedHashMap_LinkedHashMap$_empty(null, null);
+    t5 = P.LinkedHashMap_LinkedHashMap$_empty(null, null);
+    t4 = P.LinkedHashSet_LinkedHashSet(null, null, null, null);
     t3 = P.LinkedHashMap_LinkedHashMap$_empty(null, null);
-    state = new T.Group("list", null, H.assertSubtype([], "$isList", [T.Shape], "$asList"), H.assertSubtype([], "$isList", [T.Anim], "$asList"), H.assertSubtype([], "$isList", [T.Anim], "$asList"), t8, t7, t6, t5, t4, t3, null);
+    t2 = P.LinkedHashMap_LinkedHashMap$_empty(null, null);
+    state = new T.Group("list", null, H.assertSubtype([], "$isList", [T.Shape], "$asList"), H.assertSubtype([], "$isList", [T.Anim], "$asList"), H.assertSubtype([], "$isList", [T.Anim], "$asList"), t7, t6, t5, t4, t3, t2, null);
     state._tag = "g";
-    C.JSArray_methods.add$1(t9, state);
-    t7.$indexSet(0, "stroke-width", new S.main_closure0());
-    t7.$indexSet(0, "transform", new S.main_closure1());
-    t8.$indexSet(0, "mouseenter", new S.main_closure2());
-    t8.$indexSet(0, "mouseleave", new S.main_closure3());
-    t8 = state.append$2(0, null, "rect")._attrMap;
-    t8.$indexSet(0, "x", -10);
-    t8.$indexSet(0, "y", -10);
-    t8.$indexSet(0, "width", 20);
-    t8.$indexSet(0, "height", 20);
-    t8.$indexSet(0, "id", t2.call$1("name"));
-    t8.$indexSet(0, "stroke", t2.call$1("color"));
-    t8.$indexSet(0, "fill", new S.main_closure4());
+    C.JSArray_methods.add$1(t8, state);
+    t6.$indexSet(0, "stroke-width", new S.main_closure0());
+    t6.$indexSet(0, "transform", new S.main_closure1());
+    t7.$indexSet(0, "mouseenter", new S.main_closure2());
+    t7.$indexSet(0, "mouseleave", new S.main_closure3());
+    t7 = state.append$2(0, null, "rect")._attrMap;
+    t7.$indexSet(0, "x", -10);
+    t7.$indexSet(0, "y", -10);
+    t7.$indexSet(0, "width", 20);
+    t7.$indexSet(0, "height", 20);
+    t7.$indexSet(0, "id", t1.call$1("name"));
+    t7.$indexSet(0, "stroke", t1.call$1("color"));
+    t7.$indexSet(0, "fill", new S.main_closure4());
     circle2 = state.append$2(0, null, "rect");
-    t8 = circle2._attrMap;
-    t8.$indexSet(0, "x", new S.main_closure5());
-    t8.$indexSet(0, "y", new S.main_closure6());
-    t8.$indexSet(0, "r", 15);
-    t8.$indexSet(0, "width", 12);
-    t8.$indexSet(0, "height", 6);
-    t8.$indexSet(0, "id", t2.call$1("name"));
-    t8.$indexSet(0, "stroke", t2.call$1("color"));
-    t8.$indexSet(0, "stroke-width", 1);
-    t8.$indexSet(0, "transform", new S.main_closure7());
+    t7 = circle2._attrMap;
+    t7.$indexSet(0, "x", new S.main_closure5());
+    t7.$indexSet(0, "y", new S.main_closure6());
+    t7.$indexSet(0, "r", 15);
+    t7.$indexSet(0, "width", 12);
+    t7.$indexSet(0, "height", 6);
+    t7.$indexSet(0, "id", t1.call$1("name"));
+    t7.$indexSet(0, "stroke", t1.call$1("color"));
+    t7.$indexSet(0, "stroke-width", 1);
+    t7.$indexSet(0, "transform", new S.main_closure7());
     circle2._cssMap.$indexSet(0, "pointer-events", "stroke");
-    t8 = engine.append$2(0, null, "text");
-    t8._text = t2.call$1("FPS");
-    t8 = t8._attrMap;
-    t8.$indexSet(0, "x", 300);
-    t8.$indexSet(0, "y", 30);
-    t8.$indexSet(0, "font-size", 24);
-    t8.$indexSet(0, "fill", "red");
-    t8.$indexSet(0, "stroke", new S.main_closure8());
-    t1.lastTime_0 = 0;
-    C.Window_methods.get$animationFrame(window).then$1(new S.main_loop(t1, data, engine));
+    t7 = engine.append$2(0, null, "text");
+    t7._text = t1.call$1("FPS");
+    t7 = t7._attrMap;
+    t7.$indexSet(0, "x", 300);
+    t7.$indexSet(0, "y", 30);
+    t7.$indexSet(0, "font-size", 24);
+    t7.$indexSet(0, "fill", "red");
+    t7.$indexSet(0, "stroke", new S.main_closure8());
+    ({}).lastTime_0 = 0;
+    H.assertSubtype(data, "$isMap", [P.String, null], "$asMap");
+    engine._render$3(data, data, svg);
   }, "call$0", "main$closure", 0, 0, 0],
   main_bind: {
     "^": "Closure:11;",
@@ -3758,7 +3758,7 @@ var $$ = {};
     return symbol.get$_name();
   },
   ListIterator: {
-    "^": "Object;_iterable,_length,_index,_current",
+    "^": "Object;_iterable,__internal$_length,_index,_current",
     set$_current: function(_current) {
       this._current = H.assertSubtypeOfRuntimeType(_current, H.getTypeArgumentByIndex(this, 0));
     },
@@ -3770,7 +3770,7 @@ var $$ = {};
       t1 = this._iterable;
       t2 = J.getInterceptor$asx(t1);
       $length = t2.get$length(t1);
-      if (this._length !== $length)
+      if (this.__internal$_length !== $length)
         throw H.wrapException(P.ConcurrentModificationError$(t1));
       t3 = this._index;
       if (t3 >= $length) {
@@ -5083,9 +5083,9 @@ var $$ = {};
     return result.get$_contents();
   },
   _HashMap: {
-    "^": "Object;_collection$_length,_strings,_nums,_rest,_keys",
+    "^": "Object;_length,_strings,_nums,_rest,_keys",
     get$length: function(_) {
-      return this._collection$_length;
+      return this._length;
     },
     get$keys: function() {
       return H.listSuperNativeTypeCheck(H.setRuntimeTypeInfo(new P.HashMapKeyIterable(this), [H.getTypeArgumentByIndex(this, 0)]), "$isIterable");
@@ -5160,7 +5160,7 @@ var $$ = {};
       bucket = rest[hash];
       if (bucket == null) {
         P._HashMap__setTableEntry(rest, hash, [key, value]);
-        ++this._collection$_length;
+        ++this._length;
         this._keys = null;
       } else {
         index = this._findBucketIndex$2(bucket, key);
@@ -5168,7 +5168,7 @@ var $$ = {};
           bucket[index + 1] = value;
         else {
           bucket.push(key, value);
-          ++this._collection$_length;
+          ++this._length;
           this._keys = null;
         }
       }
@@ -5189,7 +5189,7 @@ var $$ = {};
       t1 = this._keys;
       if (t1 != null)
         return t1;
-      result = Array(this._collection$_length);
+      result = Array(this._length);
       result.fixed$length = init;
       strings = this._strings;
       if (strings != null) {
@@ -5223,7 +5223,7 @@ var $$ = {};
           }
         }
       }
-      H.assertHelper(index === this._collection$_length);
+      H.assertHelper(index === this._length);
       this._keys = result;
       return result;
     },
@@ -5231,7 +5231,7 @@ var $$ = {};
       H.assertSubtypeOfRuntimeType(key, H.getTypeArgumentByIndex(this, 0));
       H.assertSubtypeOfRuntimeType(value, H.getTypeArgumentByIndex(this, 1));
       if (table[key] == null) {
-        ++this._collection$_length;
+        ++this._length;
         this._keys = null;
       }
       P._HashMap__setTableEntry(table, key, value);
@@ -5279,7 +5279,7 @@ var $$ = {};
   HashMapKeyIterable: {
     "^": "IterableBase;_map",
     get$length: function(_) {
-      return this._map._collection$_length;
+      return this._map._length;
     },
     get$iterator: function(_) {
       var t1 = this._map;
@@ -5333,9 +5333,9 @@ var $$ = {};
     $isIterator: true
   },
   _LinkedHashMap: {
-    "^": "Object;_collection$_length,_strings,_nums,_rest,_first,_last,_modifications",
+    "^": "Object;_length,_strings,_nums,_rest,_first,_last,_modifications",
     get$length: function(_) {
-      return this._collection$_length;
+      return this._length;
     },
     get$keys: function() {
       return H.listSuperNativeTypeCheck(H.setRuntimeTypeInfo(new P.LinkedHashMapKeyIterable(this), [H.getTypeArgumentByIndex(this, 0)]), "$isIterable");
@@ -5460,13 +5460,13 @@ var $$ = {};
       return H.assertSubtypeOfRuntimeType(cell._value, H.getTypeArgumentByIndex(this, 1));
     },
     clear$0: function(_) {
-      if (this._collection$_length > 0) {
+      if (this._length > 0) {
         this._last = null;
         this._first = null;
         this._rest = null;
         this._nums = null;
         this._strings = null;
-        this._collection$_length = 0;
+        this._length = 0;
         this._modifications = this._modifications + 1 & 67108863;
       }
     },
@@ -5517,7 +5517,7 @@ var $$ = {};
         last._next = cell;
         this._last = cell;
       }
-      ++this._collection$_length;
+      ++this._length;
       this._modifications = this._modifications + 1 & 67108863;
       return cell;
     },
@@ -5537,7 +5537,7 @@ var $$ = {};
         this._last = previous;
       } else
         next._previous = previous;
-      --this._collection$_length;
+      --this._length;
       this._modifications = this._modifications + 1 & 67108863;
     },
     _computeHashCode$1: function(key) {
@@ -5587,7 +5587,7 @@ var $$ = {};
   LinkedHashMapKeyIterable: {
     "^": "IterableBase;_map",
     get$length: function(_) {
-      return this._map._collection$_length;
+      return this._map._length;
     },
     get$iterator: function(_) {
       var t1, t2;
@@ -5645,14 +5645,14 @@ var $$ = {};
     $isIterator: true
   },
   _LinkedHashSet: {
-    "^": "_HashSetBase;_collection$_length,_strings,_nums,_rest,_first,_last,_modifications",
+    "^": "_HashSetBase;_length,_strings,_nums,_rest,_first,_last,_modifications",
     get$iterator: function(_) {
       var t1 = H.setRuntimeTypeInfo(new P.LinkedHashSetIterator(this, this._modifications, null, H.assertSubtypeOfRuntimeType(null, null)), [null]);
       t1._cell = t1._set._first;
       return H.assertSubtype(t1, "$isIterator", [H.getTypeArgumentByIndex(this, 0)], "$asIterator");
     },
     get$length: function(_) {
-      return this._collection$_length;
+      return this._length;
     },
     contains$1: function(_, object) {
       var strings, nums;
@@ -5692,7 +5692,7 @@ var $$ = {};
       index = this._findBucketIndex$2(bucket, object);
       if (index < 0)
         return H.assertSubtypeOfRuntimeType(null, H.getTypeArgumentByIndex(this, 0));
-      return H.assertSubtypeOfRuntimeType(J.$index$asx(bucket, index).get$_element(), H.getTypeArgumentByIndex(this, 0));
+      return H.assertSubtypeOfRuntimeType(J.$index$asx(bucket, index).get$_collection$_element(), H.getTypeArgumentByIndex(this, 0));
     },
     forEach$1: function(_, action) {
       var t1, cell, modifications;
@@ -5700,7 +5700,7 @@ var $$ = {};
       cell = this._first;
       modifications = this._modifications;
       for (; cell != null;) {
-        t1.call$1(cell._element);
+        t1.call$1(cell._collection$_element);
         if (modifications !== this._modifications)
           throw H.wrapException(P.ConcurrentModificationError$(this));
         cell = cell._next;
@@ -5768,13 +5768,13 @@ var $$ = {};
       return true;
     },
     clear$0: function(_) {
-      if (this._collection$_length > 0) {
+      if (this._length > 0) {
         this._last = null;
         this._first = null;
         this._rest = null;
         this._nums = null;
         this._strings = null;
-        this._collection$_length = 0;
+        this._length = 0;
         this._modifications = this._modifications + 1 & 67108863;
       }
     },
@@ -5811,7 +5811,7 @@ var $$ = {};
         last._next = cell;
         this._last = cell;
       }
-      ++this._collection$_length;
+      ++this._length;
       this._modifications = this._modifications + 1 & 67108863;
       return cell;
     },
@@ -5831,7 +5831,7 @@ var $$ = {};
         this._last = previous;
       } else
         next._previous = previous;
-      --this._collection$_length;
+      --this._length;
       this._modifications = this._modifications + 1 & 67108863;
     },
     _computeHashCode$1: function(element) {
@@ -5843,7 +5843,7 @@ var $$ = {};
         return -1;
       $length = bucket.length;
       for (i = 0; i < $length; ++i)
-        if (J.$eq(H.interceptedTypeCheck(bucket[i], "$isLinkedHashSetCell")._element, element))
+        if (J.$eq(H.interceptedTypeCheck(bucket[i], "$isLinkedHashSetCell")._collection$_element, element))
           return i;
       return -1;
     },
@@ -5867,7 +5867,7 @@ var $$ = {};
       }}
   },
   LinkedHashSetCell: {
-    "^": "Object;_element<,_next,_previous",
+    "^": "Object;_collection$_element<,_next,_previous",
     $isLinkedHashSetCell: true
   },
   LinkedHashSetIterator: {
@@ -5888,7 +5888,7 @@ var $$ = {};
           this.set$_collection$_current(null);
           return false;
         } else {
-          this.set$_collection$_current(t1._element);
+          this.set$_collection$_current(t1._collection$_element);
           this._cell = this._cell._next;
           return true;
         }
@@ -6823,7 +6823,7 @@ var $$ = {};
       return t1 == null ? J.Interceptor.prototype.toString$0.call(this, receiver) : t1;
     },
     append$1: function(receiver, newChild) {
-      return receiver.appendChild(newChild);
+      return receiver.appendChild(H.interceptedTypeCheck(newChild, "$isNode"));
     },
     _removeChild$1: function(receiver, oldChild) {
       return receiver.removeChild(oldChild);
@@ -7025,7 +7025,7 @@ var $$ = {};
     },
     get$keys: function() {
       var attributes, keys, len, i;
-      attributes = this._html$_element.attributes;
+      attributes = this._element.attributes;
       keys = H.setRuntimeTypeInfo([], [P.String]);
       for (len = attributes.length, i = 0; i < len; ++i) {
         if (i >= attributes.length)
@@ -7040,7 +7040,7 @@ var $$ = {};
     },
     get$values: function(_) {
       var attributes, values, len, i;
-      attributes = this._html$_element.attributes;
+      attributes = this._element.attributes;
       values = H.setRuntimeTypeInfo([], [P.String]);
       for (len = attributes.length, i = 0; i < len; ++i) {
         if (i >= attributes.length)
@@ -7059,12 +7059,12 @@ var $$ = {};
     }
   },
   _ElementAttributeMap: {
-    "^": "_AttributeMap;_html$_element",
+    "^": "_AttributeMap;_element",
     $index: function(_, key) {
-      return J.getAttribute$1$x(this._html$_element, H.stringTypeCheck(key));
+      return J.getAttribute$1$x(this._element, H.stringTypeCheck(key));
     },
     $indexSet: function(_, key, value) {
-      J.setAttribute$2$x(this._html$_element, H.stringTypeCheck(key), H.stringTypeCheck(value));
+      J.setAttribute$2$x(this._element, H.stringTypeCheck(key), H.stringTypeCheck(value));
     },
     get$length: function(_) {
       return this.get$keys().length;
@@ -7074,11 +7074,11 @@ var $$ = {};
     }
   },
   _ElementCssClassSet: {
-    "^": "CssClassSetImpl;_html$_element",
+    "^": "CssClassSetImpl;_element",
     readClasses$0: function() {
       var s, t1, t2, t3, trimmed;
       s = P.LinkedHashSet_LinkedHashSet(null, null, null, P.String);
-      for (t1 = this._html$_element.className.split(" "), t2 = H.getTypeArgumentByIndex(t1, 0), H.listSuperNativeTypeCheck(t1, "$isIterable"), t3 = t1.length, t1 = H.assertSubtype(H.setRuntimeTypeInfo(new H.ListIterator(H.listSuperNativeTypeCheck(t1, "$isIterable"), t3, 0, H.assertSubtypeOfRuntimeType(null, t2)), [t2]), "$isIterator", [H.getTypeArgumentByIndex(t1, 0)], "$asIterator"); t1.moveNext$0();) {
+      for (t1 = this._element.className.split(" "), t2 = H.getTypeArgumentByIndex(t1, 0), H.listSuperNativeTypeCheck(t1, "$isIterable"), t3 = t1.length, t1 = H.assertSubtype(H.setRuntimeTypeInfo(new H.ListIterator(H.listSuperNativeTypeCheck(t1, "$isIterable"), t3, 0, H.assertSubtypeOfRuntimeType(null, t2)), [t2]), "$isIterator", [H.getTypeArgumentByIndex(t1, 0)], "$asIterator"); t1.moveNext$0();) {
         trimmed = J.trim$0$s(H.stringTypeCheck(H.assertSubtypeOfRuntimeType(t1._current, H.getTypeArgumentByIndex(t1, 0))));
         if (trimmed.length !== 0)
           s.add$1(0, trimmed);
@@ -7088,7 +7088,7 @@ var $$ = {};
     writeClasses$1: function(s) {
       H.assertSubtype(s, "$isSet", [P.String], "$asSet");
       P.List_List$from(s, true, null);
-      this._html$_element.className = s.join$1(0, " ");
+      this._element.className = s.join$1(0, " ");
     }
   },
   EventStreamProvider: {
@@ -7568,7 +7568,7 @@ var $$ = {};
       H.interceptedTypeCheck(element, "$isElement");
       for (t1 = this._eventMap.get$keys(), t2 = t1._map, t3 = H.getTypeArgumentByIndex(t1, 0), t3 = H.setRuntimeTypeInfo(new P.LinkedHashMapKeyIterator(t2, t2._modifications, null, H.assertSubtypeOfRuntimeType(null, t3)), [t3]), t3._cell = t3._map._first, H.assertSubtype(t3, "$isIterator", [H.getTypeArgumentByIndex(t1, 0)], "$asIterator"), t1 = J.getInterceptor$x(element); t3.moveNext$0();) {
         attr = H.assertSubtypeOfRuntimeType(t3._collection$_current, H.getTypeArgumentByIndex(t3, 0));
-        t1.addEventListener$2(element, attr, new T.Shape__setEvent_event(this, d, attr));
+        t1.addEventListener$2(element, attr, new T.Shape__setEvent_event(this, element, d, attr));
       }
     },
     _setupRemove$1: function(panel) {
@@ -7581,7 +7581,7 @@ var $$ = {};
       }
     },
     _updateState$4: function(state, data, rootData, panel) {
-      var t1, targetData, t2, t3, t4, d, element, t5, t6, t7, svg;
+      var t1, targetData, t2, t3, t4, t5, d, element, t6, t7, svg;
       H.assertSubtype(data, "$isMap", [P.String, null], "$asMap");
       H.interceptedTypeCheck(panel, "$isElement");
       t1 = state._path;
@@ -7590,45 +7590,46 @@ var $$ = {};
         t1 = J.getInterceptor(targetData);
         if (!!t1.$isList) {
           state._setupRemove$1(panel);
-          for (t2 = t1.get$iterator(targetData), t3 = state._svgMap, t4 = state._toBeRemovedSVG; t2.moveNext$0();) {
+          for (t2 = t1.get$iterator(targetData), t3 = state._svgMap, t4 = J.getInterceptor$x(panel), t5 = state._toBeRemovedSVG; t2.moveNext$0();) {
             d = t2.get$current();
-            if (t4.containsKey$1(d)) {
-              element = H.interceptedTypeCheck(t4.$index(0, d), "$isElement");
-              t5 = state._text;
-              if (t5 != null)
-                element.textContent = state._getFunctionString$2(t5, d);
+            if (t5.containsKey$1(d)) {
+              element = H.interceptedTypeCheck(t5.$index(0, d), "$isElement");
+              t6 = state._text;
+              if (t6 != null)
+                element.textContent = state._getFunctionString$2(t6, d);
               state._setAttr$2(element, d);
               state._setCSS$2(element, d);
               state._setClass$2(element, d);
-              t4.remove$1(0, d);
+              t5.remove$1(0, d);
             } else {
               element = H.interceptedTypeCheck(state._getElement$1(d), "$isElement");
-              t5 = state._text;
-              if (t5 != null)
-                element.textContent = state._getFunctionString$2(t5, d);
+              t6 = state._text;
+              if (t6 != null)
+                element.textContent = state._getFunctionString$2(t6, d);
               state._setAttr$2(element, d);
               state._setCSS$2(element, d);
               state._setClass$2(element, d);
               t3.$indexSet(0, d, element);
+              t4.append$1(panel, element);
             }
             H.interceptedTypeCheck(element, "$isElement");
           }
-          t2 = t4.get$keys();
-          t5 = t2._map;
+          t2 = t5.get$keys();
+          t4 = t2._map;
           t6 = H.getTypeArgumentByIndex(t2, 0);
-          t7 = new P.LinkedHashMapKeyIterator(t5, t5._modifications, null, H.assertSubtypeOfRuntimeType(null, t6));
+          t7 = new P.LinkedHashMapKeyIterator(t4, t4._modifications, null, H.assertSubtypeOfRuntimeType(null, t6));
           t6 = [t6];
           if (!(t6 == null))
             ;
           H.assertHelper(true);
           t7.$builtinTypeInfo = t6;
-          t7._cell = t5._first;
+          t7._cell = t4._first;
           H.assertSubtype(t7, "$isIterator", [H.getTypeArgumentByIndex(t2, 0)], "$asIterator");
           for (; t7.moveNext$0();) {
             d = H.assertSubtypeOfRuntimeType(t7._collection$_current, H.getTypeArgumentByIndex(t7, 0));
-            state._setExitAnim$2(t4.$index(0, d), d);
+            state._setExitAnim$2(t5.$index(0, d), d);
           }
-          t4.clear$0(0);
+          t5.clear$0(0);
           for (t1 = t1.get$iterator(targetData); t1.moveNext$0();) {
             d = t1.get$current();
             state._render$3(d, rootData, t3.$index(0, d));
@@ -7652,6 +7653,7 @@ var $$ = {};
             state._setAttr$2(element, targetData);
             state._setCSS$2(element, targetData);
             state._setClass$2(element, targetData);
+            J.append$1$x(panel, element);
           }
           state._render$3(targetData, rootData, H.interceptedTypeCheck(element, "$isElement"));
         }
@@ -7708,9 +7710,13 @@ var $$ = {};
     $isFunction: true
   },
   Shape__setEvent_event: {
-    "^": "Closure:8;this_0,d_1,attr_2",
+    "^": "Closure:8;this_0,element_1,d_2,attr_3",
     call$1: function(e) {
-      this.this_0._eventMap.$index(0, this.attr_2).call$2(e, this.d_1);
+      var t1, t2;
+      t1 = this.this_0;
+      t2 = this.d_2;
+      t1._eventMap.$index(0, this.attr_3).call$2(e, t2);
+      t1._render$3(t2, t2, this.element_1);
     },
     $isFunction: true
   },
@@ -7741,7 +7747,7 @@ var $$ = {};
       this.readClasses$0().forEach$1(0, t1);
     },
     get$length: function(_) {
-      return this.readClasses$0()._collection$_length;
+      return this.readClasses$0()._length;
     },
     lookup$1: function(value) {
       H.stringTypeCheck(value);
@@ -7937,6 +7943,9 @@ J.addEventListener$2$x = function(receiver, a0, a1) {
 };
 J.addEventListener$3$x = function(receiver, a0, a1, a2) {
   return J.getInterceptor$x(receiver).addEventListener$3(receiver, a0, a1, a2);
+};
+J.append$1$x = function(receiver, a0) {
+  return J.getInterceptor$x(receiver).append$1(receiver, a0);
 };
 J.contains$1$asx = function(receiver, a0) {
   return J.getInterceptor$asx(receiver).contains$1(receiver, a0);
