@@ -126,17 +126,6 @@ class Shape {
         break;
       case 'text':
         element = new TextElement();
-
-        var text = _text;
-        if (text != null) {
-          if (text is Function) {
-            element.text = text(d);
-          } else {
-            element.text = "$text";
-          }
-        }
-
-
         break;
       case 'g':
         element = new GElement();
@@ -188,61 +177,76 @@ class Shape {
 
   _setAttr(dom.Element element, d) {
     for (var attr in _attrMap.keys) {
-      if (_attrMap[attr] is Function) {
-        element.setAttribute(attr, "${_attrMap[attr](d)}");
-      } else {
-        element.setAttribute(attr, "${_attrMap[attr]}");
+      var value = _getFunctionString(_attrMap[attr], d);
+      ;
+      var cur = element.getAttribute(attr);
+      if (cur != value) {
+        element.setAttribute(attr, value);
       }
     }
   }
 
   _setCSS(dom.Element element, d) {
     for (var attr in _cssMap.keys) {
-      if (_cssMap[attr] is Function) {
-        element.style.setProperty(attr, "${_cssMap[attr](d)}");
-      } else {
-        element.style.setProperty(attr, "${_cssMap[attr]}");
+      var value = _getFunctionString(_cssMap[attr], d);
+      var cur = element.style.getPropertyValue(attr);
+      if (cur != value) {
+        element.style.setProperty(attr, value);
       }
     }
   }
+
 
   _setClass(dom.Element element, d) {
     for (var attr in _classSet) {
-      if (attr is Function) {
-        element.classes.add("${attr(d)}");
-      } else {
-        element.classes.add("${attr}");
+      var value = _getFunctionString(attr, d);
+      if (!element.classes.contains(value)) {
+        element.classes.add(value);
       }
     }
   }
 
+  _getFunctionString(func, d) {
+    if (func is Function) {
+      return "${func(d)}";
+    } else {
+      return "${func}";
+    }
+  }
 
   _setEvent(dom.Element element, d) {
-
     for (var attr in _eventMap.keys) {
-
       event(e) {
         _eventMap[attr](e, d);
       }
-
       element.addEventListener(attr, event);
     }
   }
 
 
+  void updateProperty(element, d) {
+    if (_text != null) {
+      element.text=_getFunctionString(_text,d);
+    }
+
+    _setAttr(element, d);
+    _setCSS(element, d);
+    _setClass(element, d);
+  }
+
   dom.Element _updateSingleTag(d, panel) {
     dom.Element element;
     if (_svgMap.containsKey(d)) {
       element = _svgMap[d];
+      updateProperty(element, d);
     }
     else {
       element = _getElement(d);
       _svgMap[d] = element;
+      updateProperty(element, d);
       panel.append(element);
     }
-    _setAttr(element, d);
-    _setCSS(element, d);
-    _setClass(element, d);
+
     //_setEvent(element, d);
 
     return element;
@@ -262,6 +266,7 @@ class Shape {
 
     if (_toBeRemovedSVG.containsKey(d)) {
       element = _toBeRemovedSVG[d];
+      updateProperty(element, d);
       _toBeRemovedSVG.remove(d);
     }
     else {
@@ -269,14 +274,13 @@ class Shape {
       //print(_tag);
 
       element = _getElement(d);
+      updateProperty(element, d);
+
       _svgMap[d] = element;
       panel.append(element);
     }
 
 
-    _setAttr(element, d);
-    _setCSS(element, d);
-    _setClass(element, d);
     //_setEvent(element, d);
 
     return element ;
@@ -318,11 +322,11 @@ class Shape {
   }
 
   void _render(Map<String, dynamic> data, rootData, dom.Element panel) {
-    nestedRender(Shape state, targetData) {
-      var element = state._updateTag(targetData, panel);
-
-      state._render(targetData, rootData, element);
-    }
+//    nestedRender(Shape state, targetData) {
+//      var element = state._updateTag(targetData, panel);
+//
+//      state._render(targetData, rootData, element);
+//    }
 
     for (Shape state in _stateList) {
 
